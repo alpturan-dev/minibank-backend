@@ -4,6 +4,7 @@ import com.alpturandev.minibank.config.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -24,5 +25,8 @@ public class User extends Auditable {
 
     @Column(unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "user")
+    private List<Account> accounts;
 
 }
