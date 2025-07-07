@@ -1,14 +1,17 @@
 package com.alpturandev.minibank.controller;
 
 import com.alpturandev.minibank.dto.SigninRequestDto;
+import com.alpturandev.minibank.dto.SigninResponseDto;
 import com.alpturandev.minibank.dto.SignupRequestDto;
 import com.alpturandev.minibank.entity.User;
 import com.alpturandev.minibank.repository.UserRepository;
 import com.alpturandev.minibank.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +31,7 @@ public class AuthController {
     JwtUtil jwtUtils;
 
     @PostMapping("/signin")
-    public String authenticateUser(@RequestBody SigninRequestDto user) {
+    public ResponseEntity<SigninResponseDto> authenticateUser(@RequestBody SigninRequestDto user) {
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
                 user.getUsername(),
@@ -36,7 +39,18 @@ public class AuthController {
             )
         );
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return jwtUtils.generateToken(userDetails.getUsername());
+        String token =  jwtUtils.generateToken(userDetails.getUsername());
+
+        // Load the user entity from DB
+        User userEntity = userRepository.findByUsername(userDetails.getUsername());
+
+        SigninResponseDto response = new SigninResponseDto(
+            token,
+            userEntity.getUsername(),
+            userEntity.getId().toString()
+        );
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/signup")
