@@ -45,9 +45,10 @@ public class AuthController {
         User userEntity = userRepository.findByUsername(userDetails.getUsername());
 
         SigninResponseDto response = new SigninResponseDto(
+            userEntity.getId(),
             token,
             userEntity.getUsername(),
-            userEntity.getId().toString()
+            userEntity.getEmail()
         );
 
         return ResponseEntity.ok(response);

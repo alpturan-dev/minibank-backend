@@ -11,5 +11,5 @@ public interface AccountService {
     public AccountResponseDto createAccount(AccountCreateRequestDto account);
     public AccountResponseDto updateAccount(AccountUpdateRequestDto account);
     public void deleteAccount(String accountId);
-    public List<AccountResponseDto> getAllAccounts();
+    public List<AccountResponseDto> getAllAccounts(String id);
 }

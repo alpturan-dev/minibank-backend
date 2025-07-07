@@ -129,9 +129,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<AccountResponseDto> getAllAccounts() {
+    public List<AccountResponseDto> getAllAccounts(String id) {
         List<AccountResponseDto> dtos = new ArrayList<>();
-        for (Account account : accountRepository.findAll()) {
+        UUID uuid = UUID.fromString(id);
+        for (Account account : accountRepository.getAllAccountsByUserId(uuid)) {
             log.info("Account found with ID: {}", account.getId());
             dtos.add(AccountResponseDto.fromEntity(account));
         }

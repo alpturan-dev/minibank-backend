@@ -3,14 +3,18 @@ package com.alpturandev.minibank.controller;
 import com.alpturandev.minibank.dto.AccountCreateRequestDto;
 import com.alpturandev.minibank.dto.AccountResponseDto;
 import com.alpturandev.minibank.dto.AccountUpdateRequestDto;
+import com.alpturandev.minibank.security.CustomUserDetails;
 import com.alpturandev.minibank.service.AccountService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/accounts")
@@ -25,7 +29,10 @@ public class AccountController {
 
     @GetMapping
     public ResponseEntity<List<AccountResponseDto>> getAllAccounts() {
-        List<AccountResponseDto> accounts = accountService.getAllAccounts();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        UUID userId = userDetails.getId();
+        List<AccountResponseDto> accounts = accountService.getAllAccounts(String.valueOf(userId));
         return ResponseEntity.status(HttpStatus.OK).body(accounts);
     }
 
