@@ -4,6 +4,7 @@ import com.alpturandev.minibank.dto.AccountCreateRequestDto;
 import com.alpturandev.minibank.dto.AccountResponseDto;
 import com.alpturandev.minibank.dto.AccountUpdateRequestDto;
 import com.alpturandev.minibank.service.AccountService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/accounts")
+@SecurityRequirement(name = "bearerAuth")
 public class AccountController {
 
     private final AccountService accountService;
