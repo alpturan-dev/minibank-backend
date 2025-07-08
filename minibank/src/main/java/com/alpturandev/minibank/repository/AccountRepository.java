@@ -12,12 +12,8 @@ import java.util.UUID;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, UUID> {
-    boolean existsByNumber(String number);
-    boolean existsByName(String name);
 
     boolean existsByNameAndIdNot(String name, @NotNull(message = "Account ID is required for update") UUID attr0);
-
-    AccountResponseDto getAccountById(UUID uuid);
 
     @Query("SELECT a FROM Account a WHERE a.user.id = :id")
     List<Account> getAllAccountsByUserId(UUID id);

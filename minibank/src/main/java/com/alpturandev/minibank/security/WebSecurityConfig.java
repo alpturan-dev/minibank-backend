@@ -38,7 +38,6 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Updated configuration for Spring Security 6.x
         http
             .csrf(csrf -> csrf.disable())
             .cors(Customizer.withDefaults())
@@ -54,10 +53,9 @@ public class WebSecurityConfig {
                         "/swagger-ui.html",
                         "/swagger-ui/**",
                         "/v3/api-docs/**",
-                        "/v3/api-docs.yaml").permitAll() // Use 'requestMatchers' instead of 'antMatchers'
+                        "/v3/api-docs.yaml").permitAll()
                     .anyRequest().authenticated()
             );
-        // Add the JWT Token filter before the UsernamePasswordAuthenticationFilter
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
