@@ -28,12 +28,10 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public TransactionResponseDto createTransaction(TransactionCreateRequestDto transaction) {
         try {
-            String fromId = transaction.getFromAccount();
-            UUID fromAccountId = UUID.fromString(fromId);
-            String toId = transaction.getToAccount();
-            UUID toAccountId = UUID.fromString(toId);
-            Account fromAccount = accountRepository.findById(fromAccountId).orElse(null);
-            Account toAccount = accountRepository.findById(toAccountId).orElse(null);
+            String fromNumber = transaction.getFromAccount();
+            String toNumber = transaction.getToAccount();
+            Account fromAccount = accountRepository.getAccountByNumber(fromNumber);
+            Account toAccount = accountRepository.getAccountByNumber(toNumber);
             BigDecimal transactionAmount = BigDecimal.valueOf(Long.parseLong(transaction.getAmount()));
             fromAccount.setBalance(fromAccount.getBalance().subtract(transactionAmount));
             toAccount.setBalance(toAccount.getBalance().add(transactionAmount));
@@ -73,7 +71,7 @@ public class TransactionServiceImpl implements TransactionService {
 
             List<TransactionResponseDto> transactionResponseDtos = new ArrayList<>();
 
-            for (Transaction transaction : transactionRepository.findAll()) {
+            for (Transaction transaction : transactions) {
                 log.info("Account found with ID: {}", account.getId());
                 transactionResponseDtos.add(TransactionResponseDto.fromEntity(transaction));
             }

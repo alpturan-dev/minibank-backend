@@ -14,7 +14,9 @@ import java.util.UUID;
 public class TransactionResponseDto {
     private UUID id;
     private String from;
+    private String fromNumber;
     private String to;
+    private String toNumber;
     private BigDecimal amount;
     private LocalDateTime transactionDate;
     private String transactionStatus;
@@ -27,7 +29,9 @@ public class TransactionResponseDto {
         return TransactionResponseDto.builder()
             .id(transaction.getId())
             .from(String.valueOf(transaction.getFrom().getId()))
+            .fromNumber(String.valueOf(transaction.getFrom().getNumber()))
             .to(String.valueOf(transaction.getTo().getId()))
+            .toNumber(String.valueOf(transaction.getTo().getNumber()))
             .amount(transaction.getAmount())
             .transactionDate(transaction.getTransactionDate())
             .transactionStatus(transaction.getStatus().toString())

@@ -21,4 +21,7 @@ public interface AccountRepository extends JpaRepository<Account, UUID> {
 
     @Query("SELECT a FROM Account a WHERE a.user.id = :id")
     List<Account> getAllAccountsByUserId(UUID id);
+
+    @Query("SELECT a FROM Account a WHERE a.number = :number")
+    Account getAccountByNumber(String number);
 }
