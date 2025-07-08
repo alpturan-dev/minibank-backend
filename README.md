@@ -6,7 +6,7 @@ A simple banking backend built using **Spring Boot**, **Spring Security**, and *
 
 
 
-## Kullanılan Teknolojiler
+## Technologies Used
 
 **Client:** React, Zustand, TailwindCSS, react-router, shadcn/ui, react-hot-toast, lucide-react
 
@@ -36,7 +36,7 @@ Docker compose up
 ```bash
   docker compose up
 ```
-Done, now you can navigate to the swagger ui:
+Done, now you can navigate to the swagger ui to test the server:
 
 http://localhost:8080/swagger-ui/index.html#/
 
