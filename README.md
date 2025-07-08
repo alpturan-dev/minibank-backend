@@ -13,7 +13,7 @@ A simple banking backend built using **Spring Boot**, **Spring Security**, and *
 **Server:** Java, Spring Boot, PostgreSQL, Docker, Docker Compose
 
 
-## Needs
+## Requirements
 
 You need to install Docker, Docker Compose and run the Docker engine in order to run the minibank app. https://www.docker.com/
 ## Running
@@ -36,8 +36,18 @@ Docker compose up
 ```bash
   docker compose up
 ```
-Done, now you can navigate to the swagger ui to test the server:
+Done, now you can navigate to the swagger ui to test the endpoints:
 
 http://localhost:8080/swagger-ui/index.html#/
+
+### Notes: 
+- You can reach the api/users/signin and api/users/signup endpoints with a JWT token. In order to access the protected routes, you should click the Authorize button and pass the token in it.
+
+
+## Writers
+
+- [@alpturandev](https://www.github.com/alpturandev) for design and development.
+
+  
 
   
