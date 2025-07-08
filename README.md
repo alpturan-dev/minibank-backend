@@ -27,6 +27,7 @@ Clone the repository:
 Change directory
 ```bash
   cd minibank-backend
+  cd minibank
 ```
 Docker compose build
 ```bash
