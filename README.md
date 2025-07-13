@@ -42,7 +42,7 @@ Done, now you can navigate to the swagger ui to test the endpoints:
 http://localhost:8080/swagger-ui/index.html#/
 
 ### Notes: 
-- You can reach the api/users/signin and api/users/signup endpoints with a JWT token. In order to access the protected routes, you should click the Authorize button and pass the token in it.
+- You can reach the api/users/signin and api/users/signup endpoints without a JWT token. In order to access the protected routes, you should click the Authorize button and pass the token in it.
 
 
 ## Writers
